@@ -12,3 +12,4 @@ dbs:
         region: "${LITESTREAM_REGION}"
         retention: 72h
         snapshot-interval: 12h
+        sync-interval: 1m
