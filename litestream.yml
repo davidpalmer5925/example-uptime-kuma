@@ -10,7 +10,7 @@ dbs:
         path: "${LITESTREAM_PATH}"
         endpoint: "${LITESTREAM_URL}"
         region: "${LITESTREAM_REGION}"
-        retention: 72h
-        force-path-style: true
-        snapshot-interval: 12h
-        sync-interval: 1m
+        retention: 7d
+        snapshot-interval: 24h
+        sync-interval: 5m
+        retention-check-interval: 6h
