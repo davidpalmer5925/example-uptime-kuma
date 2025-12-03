@@ -3,15 +3,12 @@ exec: node /app/server/server.js
 dbs:
   - path: /app/data/kuma.db
     replicas:
-      - type: s3
-        access-key-id: "${LITESTREAM_ACCESS_KEY_ID}"
-        secret-access-key: "${LITESTREAM_SECRET_ACCESS_KEY}"
-        bucket: "${LITESTREAM_BUCKET}"
-        path: "${LITESTREAM_PATH}"
-        endpoint: "${LITESTREAM_URL}"
-        region: "${LITESTREAM_REGION}"
-        retention: 7d
-        skip-verify: true
-        snapshot-interval: 72h
-        sync-interval: 15m
-        retention-check-interval: 24h
+      - type: sftp
+        host: "${LITESTREAM_SFTP_HOST}"
+        user: "${LITESTREAM_SFTP_USER}"
+        password: "${LITESTREAM_SFTP_PASSWORD}"
+        path: "${LITESTREAM_SFTP_PATH}"
+        sync-interval: 10m
+        snapshot-interval: 1h
+        retention: 2h
+        retention-check-interval: 1h
