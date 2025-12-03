@@ -8,7 +8,7 @@ dbs:
         user: "${LITESTREAM_SFTP_USER}"
         password: "${LITESTREAM_SFTP_PASSWORD}"
         path: "${LITESTREAM_SFTP_PATH}"
-        sync-interval: 10m
+        sync-interval: 1m
         snapshot-interval: 1h
         retention: 2h
         retention-check-interval: 1h
