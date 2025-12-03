@@ -11,6 +11,7 @@ dbs:
         endpoint: "${LITESTREAM_URL}"
         region: "${LITESTREAM_REGION}"
         retention: 7d
+        skip-verify: true
         snapshot-interval: 72h
         sync-interval: 15m
         retention-check-interval: 24h
