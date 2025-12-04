@@ -7,7 +7,6 @@ dbs:
         secret-access-key: "${LITESTREAM_SECRET_ACCESS_KEY}"
         bucket: "${LITESTREAM_BUCKET}"
         path: "${LITESTREAM_PATH}"
-        endpoint: "${LITESTREAM_URL}"
         region: "${LITESTREAM_REGION}"
         sync-interval: 1m
         snapshot-interval: 1h
