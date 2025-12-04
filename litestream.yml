@@ -1,4 +1,3 @@
-# Automatically start Uptime Kuma when Litestream begins replicating
 exec: node /app/server/server.js
 dbs:
   - path: /app/data/kuma.db
@@ -7,9 +6,9 @@ dbs:
         access-key-id: "${LITESTREAM_ACCESS_KEY_ID}"
         secret-access-key: "${LITESTREAM_SECRET_ACCESS_KEY}"
         bucket: "${LITESTREAM_BUCKET}"
-        region: "${LITESTREAM_REGION}"
         path: "${LITESTREAM_PATH}"
+        endpoint: "${LITESTREAM_URL}"
+        region: "${LITESTREAM_REGION}"
         sync-interval: 1m
-        snapshot-interval: 1h
-        retention: 2h
-        retention-check-interval: 1h
+        retention: 72h
+        snapshot-interval: 12h
