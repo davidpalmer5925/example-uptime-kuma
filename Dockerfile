@@ -1,12 +1,8 @@
-# --- Etapa 1: Builder (Descarga de CLI y VFS Beta) ---
 FROM docker.io/alpine:latest AS BUILDER
-
-# Instalamos herramientas
 RUN apk add --no-cache curl jq ca-certificates
 
 WORKDIR /tmp
 
-# Script robusto para descargar AMBOS archivos (CLI y VFS)
 RUN set -e; \
     echo "--- 1. Obteniendo JSON de Releases ---"; \
     curl -fL -s https://api.github.com/repos/benbjohnson/litestream/releases -o release.json; \
@@ -34,24 +30,18 @@ RUN set -e; \
     mkdir -p /usr/local/lib && \
     find . -type f -name "litestream.so" -exec mv {} /usr/local/lib/litestream.so \;
 
-# --- Etapa 2: Imagen Final (Uptime Kuma + Litestream Full) ---
 FROM docker.io/louislam/uptime-kuma:1
 
 ARG UPTIME_KUMA_PORT=3001
 WORKDIR /app
 RUN mkdir -p /app/data
 
-# 1. Copiamos el CLI ejecutable
 COPY --from=BUILDER /usr/local/bin/litestream /usr/local/bin/litestream
-
-# 2. Copiamos la librería VFS (Agregado)
 COPY --from=BUILDER /usr/local/lib/litestream.so /usr/local/lib/litestream.so
 
-# 3. Copiamos scripts de configuración
 COPY litestream.yml /etc/litestream.yml
 COPY run.sh /usr/local/bin/run.sh
 
-# Aseguramos permisos
 RUN chmod +x /usr/local/bin/run.sh /usr/local/bin/litestream
 
 EXPOSE ${UPTIME_KUMA_PORT}
